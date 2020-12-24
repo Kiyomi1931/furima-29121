@@ -1,24 +1,59 @@
-# README
+## table設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+|Column|Type|Options|
+|------|----|-------|
+|nickname|string|null:false|
+|email|string|null:false|
+|password|string|null:false|
+|password-confirmation|string|null:false|
+|last-name|string|null:false|
+|first-name|string|null:false|
+|last-name-kana|string|null:false|
+|first-name-kana|string|null:false|
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :buys
 
-* Configuration
+##  itemsテーブル
 
-* Database creation
+|Column|Type|Options|
+|------|----|-------|
+|item[image]|不明|null:false|
+|item[name]|string|null:false|
+|item[info]|string|null:false|
+|item[category_id]|integer|null:false|
+|item[sales_status_id]|integer|null:false|
+|items[prefecture_id]|integer|null:false|
+|items[scheduled_delivery_id]|integer|null:false|
+|item[price]|integer|null:false|
 
-* Database initialization
+- belongs_to :users
+- has_one :buys
 
-* How to run the test suite
+## addressesテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+|Column|Type|Options|
+|------|----|-------|
+|postal_code|integer|null:false|
+|prefecture|integer|null:false|
+|city|string|null:false|
+|addresses|string|null:false|
+|building|string|
 
-* Deployment instructions
+- belongs_to :buys
 
-* ...
+## buysテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|buy_item-img|不明|foreign_key: true|
+|buy-item-text|string|foreign_key: true|
+|buy-item-price|integer|foreign_key: true|
+
+- belongs_to :users
+- belongs_to :items
+- has_one :addresses
