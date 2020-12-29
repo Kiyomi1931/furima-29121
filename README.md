@@ -54,6 +54,7 @@
 |------|----|-------|
 |user_id|integer|null:false|
 item_id|integer|null:false|
+|address_id|integer|foreign_key: true|
 |buy_item_text|string|foreign_key: true|
 |buy_item_price|integer|foreign_key: true|
 
