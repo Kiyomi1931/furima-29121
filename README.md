@@ -30,6 +30,7 @@
 |prefecture_id|integer|null:false|
 |scheduled_delivery_id|integer|null:false|
 |price|integer|null:false|
+|user_id|integer|foreign_key: true|
 
 - belongs_to :user
 - has_one :buy
