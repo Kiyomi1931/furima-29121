@@ -7,10 +7,10 @@
 |nickname|string|null:false|
 |email|string|null:false|
 |encrypted_password|string|null:false|
-|last-name|string|null:false|
-|first-name|string|null:false|
-|last-name-kana|string|null:false|
-|first-name-kana|string|null:false|
+|last_name|string|null:false|
+|first_name|string|null:false|
+|last_name_kana|string|null:false|
+|first_name_kana|string|null:false|
 |user_birth_date１i|integer|null:false|
 |user_birth_date2i)|integer|null:false|
 |user_birth_date3i|integer|null:false|
