@@ -11,9 +11,7 @@
 |first_name|string|null:false|
 |last_name_kana|string|null:false|
 |first_name_kana|string|null:false|
-|user_birth_date１i|integer|null:false|
-|user_birth_date2i)|integer|null:false|
-|user_birth_date3i|integer|null:false|
+|user_birth_date|date|null:false|
 
 ### Association
 
