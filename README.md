@@ -52,8 +52,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null:false|
-item_id|integer|null:false|
+|user_id|integer|foreign_key: true|
+|item_id|integer|foreign_key: true|
 |address_id|integer|foreign_key: true|
 |buy_item_text|string|foreign_key: true|
 |buy_item_price|integer|foreign_key: true|
