@@ -45,6 +45,7 @@
 |addresses|string|null:false|
 |building|string|
 |phone_number|string|null:false|
+|address_id|integer|foreign_key: true|
 
 - belongs_to :buy
 
@@ -54,7 +55,6 @@
 |------|----|-------|
 |user_id|integer|foreign_key: true|
 |item_id|integer|foreign_key: true|
-|address_id|integer|foreign_key: true|
 
 - belongs_to :user
 - belongs_to :item
