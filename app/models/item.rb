@@ -9,14 +9,20 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
 
-  validates :image, presence: true
-  validates :name, presence: true
-  validates :info, presence: true
-  validates :category_id, presence: true, numericality: {other_than: 1}
-  validates :sales_status_id, presence: true, numericality: {other_than: 1}
-  validates :shipping_fee_status_id, presence: true, numericality: {other_than: 1}
-  validates :prefecture_id, presence: true, numericality: {other_than: 0}
-  validates :scheduled_delivery_id, presence: true, numericality: {other_than: 1}
-  validates :price, presence: true, format:{with:/\A[0-9]+\z/}, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :info
+    validates :prefecture_id,numericality: {other_than: 0}
+    validates :price, format:{with:/\A[0-9]+\z/}, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+
+    with_options numericality: {other_than: 1} do
+      validates :category_id 
+      validates :sales_status_id 
+      validates :shipping_fee_status_id
+      validates :scheduled_delivery_id
+    
+    end
+  end
 
 end
