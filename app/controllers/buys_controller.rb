@@ -1,9 +1,10 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :user_check, only: :index
+  before_action :item_check, only: :index
 
   def index
     @order_form = OrderForm.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -19,6 +20,21 @@ class BuysController < ApplicationController
   end
 
   private
+  def user_check
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user.id
+      redirect_to root_path
+    end
+  end
+
+  def item_check
+    @item = Item.find(params[:item_id])
+    @buy = Buy.find(params[:item_id])
+    if @buy.item_id == @item.id
+      redirect_to root_path
+    end
+  end
+
   def order_params
     params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(token: params[:token],user_id: current_user.id, item_id: params[:item_id])
   end
