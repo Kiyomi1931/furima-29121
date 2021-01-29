@@ -23,7 +23,8 @@ class BuysController < ApplicationController
     @item = Item.find(params[:item_id])
     @buy = Buy.find(params[:item_id])
     if @buy.item_id == @item.id || current_user.id == @item.user.id
-    redirect_to root_path
+      redirect_to root_path
+    end
   end
 
   def order_params
