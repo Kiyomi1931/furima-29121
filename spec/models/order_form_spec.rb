@@ -57,6 +57,16 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
+      it "user_idが空では登録できないこと" do
+        @order_form.user_id=nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空では登録できないこと" do
+        @order_form.item_id=nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end

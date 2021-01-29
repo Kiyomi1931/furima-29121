@@ -1,7 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!, only: :index
-  before_action :user_check, only: :index
-  before_action :item_check, only: :index
+  before_action :check, only: :index
 
   def index
     @order_form = OrderForm.new
@@ -20,19 +19,11 @@ class BuysController < ApplicationController
   end
 
   private
-  def user_check
-    @item = Item.find(params[:item_id])
-    if current_user.id == @item.user.id
-      redirect_to root_path
-    end
-  end
-
-  def item_check
+  def check
     @item = Item.find(params[:item_id])
     @buy = Buy.find(params[:item_id])
-    if @buy.item_id == @item.id
-      redirect_to root_path
-    end
+    if @buy.item_id == @item.id || current_user.id == @item.user.id
+    redirect_to root_path
   end
 
   def order_params
