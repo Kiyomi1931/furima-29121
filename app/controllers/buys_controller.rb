@@ -21,8 +21,7 @@ class BuysController < ApplicationController
   private
   def check
     @item = Item.find(params[:item_id])
-    @buy = Buy.find(params[:item_id])
-    if @buy.item_id == @item.id || current_user.id == @item.user.id
+    if @item.buy.present? || current_user.id == @item.user.id
       redirect_to root_path
     end
   end

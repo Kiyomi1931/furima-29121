@@ -5,19 +5,17 @@ RSpec.describe OrderForm, type: :model do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
     @order_form = FactoryBot.build(:order_form)
+    @order_form.user_id = @user.id
+    @order_form.item_id=@item.id
     sleep(0.5)
   end
 
   describe '商品購入機能' do
     context '商品購入ができる時' do
       it "購入フォームに全て記述すれば購入できる。" do
-        @order_form.user_id = @user.id
-        @order_form.item_id=@item.id
         expect(@order_form).to be_valid
       end
       it "建物名が抜けていても登録できること" do
-        @order_form.user_id=@user.id
-        @order_form.item_id=@item.id
         @order_form.building=nil
         expect(@order_form).to be_valid
       end
@@ -68,13 +66,18 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
+      it "英数混合では登録できないこと" do
+        @order_form.phone_number="abc0120"
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone number is invalid")
+      end
       it "user_idが空では登録できないこと" do
-        @user_id=nil
+        @order_form.user_id=nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("User can't be blank")
       end
       it "item_idが空では登録できないこと" do
-        @item_id=nil
+        @order_form.item_id=nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Item can't be blank")
       end
