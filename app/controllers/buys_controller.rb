@@ -1,5 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :ready, only:[:index, :create]
   before_action :check, only: :index
 
   def index
@@ -8,7 +9,6 @@ class BuysController < ApplicationController
 
   def create
     @order_form = OrderForm.new(order_params)
-    @item = Item.find(params[:item_id])
     if @order_form.valid?
       pay_item
       @order_form.save
@@ -19,8 +19,11 @@ class BuysController < ApplicationController
   end
 
   private
-  def check
+  def ready
     @item = Item.find(params[:item_id])
+  end
+
+  def check
     if @item.buy.present? || current_user.id == @item.user.id
       redirect_to root_path
     end
